@@ -1,10 +1,12 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { TabNavigator, StackNavigator } from 'react-navigation'
+import { white, purple, udacityBlue } from '../utils/colors'
 import Deck from './Deck'
 import DeckList from './DeckList'
 import AddCard from './AddCard'
-import DeckQuestion from './DeckQuestion'
+import AddDeck from './AddDeck'
 import Quiz from './Quiz'
 
 const Tabs = TabNavigator({
@@ -16,20 +18,14 @@ const Tabs = TabNavigator({
     }
   },
   AddCard: {
-    screen: AddCard,
+    screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'Add new card',
+      tabBarLabel: 'Add new Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     }
   },
-  Live: {
-    screen: Live,
-    navigationOptions: {
-      tabBarLabel: 'Live',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-speedometer' size={30} color={tintColor} />
-    }
-  }
 }, {
+  animationEnabled: true,
   navigationOptions: {
     header: null
   },
@@ -49,12 +45,24 @@ const Tabs = TabNavigator({
   }
 })
 
-const MainNavigator = StackNavigator({
+const Stacks = StackNavigator({
+  Deck: {
+    screen: Deck
+  },
+  AddCard: {
+    screen: AddCard
+  },
+  Quiz: {
+    screen: Quiz
+  }
+})
+
+export const Navigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
-  EntryDetail: {
-    screen: EntryDetail,
+  Stacks: {
+    screen: Stacks,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

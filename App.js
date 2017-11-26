@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import { udacityBlue } from './utils/colors'
+import { Navigator } from './components/Navigator'
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -14,6 +15,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <MyStatusBar backgroundColor={udacityBlue} barStyle='light-content'/>
+        <Navigator />
       </View>
     );
   }

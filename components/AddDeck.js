@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { purple } from '../utils/colors'
 
-class NewQuestion extends Component {
+class AddDeck extends Component {
   render() {
     return (
       <View>
         <Text style={{color: purple, fontSize: 25}}>
-          NewQuestion
+          AddDeck
         </Text>
       </View>
     )    
   }
 }
 
-export default NewQuestion
+export default AddDeck
