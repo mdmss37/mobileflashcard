@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
+import { udacityBlue } from './utils/colors'
 
 const myStatusBar = ({ backgroundColor, ...props }) => (
   <View style={{ backgroundColor, height: Constants.StatusBarHeight }}>
