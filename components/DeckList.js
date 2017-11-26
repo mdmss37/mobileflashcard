@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
-import { Text, FlatList, View, StyleSheet } from 'react-native'
+import { Text, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { purple } from '../utils/colors'
+import { connect } from 'react-redux'
+import { recieveDecks } from '../actions'
+import { getDecks } from '../utils/api'
+import { AppLoading } from 'expo'
+
+const DeckListItem = ({ navigation, title, questionNum }) => {
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Deck', { title } )}>
+      <View>
+        <Text>{title}</Text>
+        <Text>This deck has {questionNum} cards</Text>
+      </View>
+      
+    </TouchableOpacity>
+  )
+}
 
 const Separator = () => {
   return (
@@ -8,53 +25,59 @@ const Separator = () => {
       style={{
       height: 1,
       width: '100%',
-      backgroundColor: 'Black'
+      backgroundColor: 'black'
     }} />
   )
 }
 
 class DeckList extends Component {
   state = {
-    decks: [
-       {
-        title: 'React',
-        questions: [
-          {
-            question: 'What is React?',
-            answer: 'A library for managing user interfaces'
-          },
-          {
-            question: 'Where do you make Ajax requests in React?',
-            answer: 'The componentDidMount lifecycle event'
-          }
-        ]
-      },
-      {
-        title: 'JavaScript',
-        questions: [
-          {
-            question: 'What is a closure?',
-            answer: 'The combination of a function and the lexical environment within which that function was declared.'
-          }
-        ]
-      }
-    
-    ]
+    ready: false,
+  }
+
+  componentDidMount() {
+    getDecks()
+      .then(decks => this.props.dispatch(recieveDecks(decks)))
+      .then(() => this.setState(() => ({
+        ready: true,
+      })))
   }
 
   render() {
-    const { decks } = this.state
-    console.log(decks)
+    const { decks } = this.props
+    const decksLength = Object.keys(decks).length
+    const decksArray = Object.keys(decks).map((key) => decks[key])
+    console.log(decksArray)
+    const { ready } = this.state
+
+    if (ready === false) {
+      return <AppLoading />
+    }
+
     return (
       <View style={styles.container}>
         <Text style={{color: purple, fontSize: 25}}>
           DeckList
         </Text>
-        <FlatList 
-          data={decks}
-          renderItem={({item}) => <Text>{item.title}</Text>}
-          keyExtractor={item => item.title}
+        { decksLength > 0 
+          ?
+          <FlatList 
+            data={decksArray}
+            renderItem={({ item }) => 
+              <DeckListItem
+                navigation={this.props.navigation}
+                title={item.title}
+                questionNum={item.questions.length}
+              />
+            }
+              
+            keyExtractor={item => item.title}
+            ItemSeparatorComponent={Separator}
           />
+          :
+          <Text>No Deck Available, Please add Deck.</Text>          
+        }
+
       </View>
     )    
   }
@@ -67,5 +90,11 @@ const styles = StyleSheet.create({
   }
 })
 
+function mapStateToProps(state) {
+  return {
+    decks: state
+  }
+}
 
-export default DeckList
+export default connect(mapStateToProps)(DeckList)
+

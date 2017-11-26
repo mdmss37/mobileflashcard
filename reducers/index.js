@@ -2,7 +2,14 @@ import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
 
 function decks(state = {}, action) {
-  return state
+  switch (action.type) {
+    case RECEIVE_DECKS :
+      return {
+        ...action.decks
+      }
+    default :
+      return state
+  }
 }
 
 export default decks
