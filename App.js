@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
-import { createStore } from 'react'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import reducer from './reducers'
 import { udacityBlue } from './utils/colors'
 import { Navigator } from './components/Navigator'
 
