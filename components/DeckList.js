@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import { Text, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, Platform, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { purple } from '../utils/colors'
 import { connect } from 'react-redux'
 import { recieveDecks } from '../actions'
 import { getDecks } from '../utils/api'
 import { AppLoading } from 'expo'
+import { pluralize } from '../utils/helpers'
 
 const DeckListItem = ({ navigation, title, questionNum }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Deck', { title } )}>
-      <View>
-        <Text>{title}</Text>
-        <Text>This deck has {questionNum} cards</Text>
+      <View style={styles.listItem}>
+        <Text style={styles.titleStyle}>{title}</Text>
+        <Text style={styles.cardNumberDesc}>This deck has {pluralize(questionNum, 'card')}</Text>
       </View>
-      
     </TouchableOpacity>
   )
 }
@@ -56,9 +56,9 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={{color: purple, fontSize: 25}}>
-          DeckList
-        </Text>
+        <View style={[styles.center, { height: 20, marginTop: 10}]}>
+          <Text style={styles.titleStyle}>Your flash card decks</Text>
+        </View>
         { decksLength > 0 
           ?
           <FlatList 
@@ -72,12 +72,11 @@ class DeckList extends Component {
             }
               
             keyExtractor={item => item.title}
-            ItemSeparatorComponent={Separator}
+            //ItemSeparatorComponent={Separator}
           />
           :
           <Text>No Deck Available, Please add Deck.</Text>          
         }
-
       </View>
     )    
   }
@@ -85,8 +84,38 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
+  },
+  center: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#CCC',
+    borderWidth: 1,
+    borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    shadowRadius: 6,
+    shadowOpacity: 0.6,
+    shadowColor: 'rgba(0,0,0,24)',
+    shadowOffset: {
+      width: 1,
+      height: 5,
+    }
+  },
+  titleStyle: {
+    fontSize: 30,
+  },
+  cardNumberDesc: {
+    fontSize: 20,
+    color: '#BBB',
   }
 })
 

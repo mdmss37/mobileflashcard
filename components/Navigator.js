@@ -45,29 +45,28 @@ const Tabs = TabNavigator({
   }
 })
 
-const Stacks = StackNavigator({
-  Deck: {
-    screen: Deck
-  },
-  AddCard: {
-    screen: AddCard
-  },
-  Quiz: {
-    screen: Quiz
+const navigationOptions = {
+  headerTintColor: white,
+  headerStyle: {
+    backgroundColor: udacityBlue,
   }
-})
+}
 
 export const Navigator = StackNavigator({
   Home: {
     screen: Tabs,
+    navigationOptions: { ...navigationOptions, title: "Flash cards"}
   },
-  Stacks: {
-    screen: Stacks,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
+  Deck: {
+    screen: Deck,
+    navigationOptions,
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: { ...navigationOptions, title: "Add card"}
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: { ...navigationOptions, title: "Quiz"}
   }
 })
