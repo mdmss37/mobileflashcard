@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
-import { purple } from '../utils/colors'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { purple, qiitaGreen, orange } from '../utils/colors'
 import { connect } from 'react-redux'
 import { pluralize } from '../utils/helpers'
 
@@ -13,25 +13,50 @@ class Deck extends Component {
     return (
       <View style={{flex: 1, padding: 40}}>
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={{textAlign: 'center', fontSize: 25}}>{title}</Text>
-          <Text style={{textAlign: 'center', fontSize: 25}}>
-            {pluralize(deck.questions.length, 'card')}
-          </Text>
-        </View>
-        <View>
-          <TouchableOpacity>
-            <Text>Start quiz</Text>
+          <View style={{flex: 5, justifyContent: 'center'}}>
+            <Text style={{textAlign: 'center', fontSize: 60}}>{title}</Text>
+            <Text style={{textAlign: 'center', fontSize: 40}}>
+              {pluralize(deck.questions.length, 'card')}
+            </Text>          
+          </View>
+          <TouchableOpacity style={styles.startQuizBtn}>
+            <Text style={{textAlign: 'center', fontSize: 25}}>Start quiz</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>Add new card</Text>
+          <TouchableOpacity style={styles.addCardBtn} onPress={() => navigation.navigate('AddCard', { title })}>
+            <Text style={{textAlign: 'center', fontSize: 25}}>Add new card</Text>
           </TouchableOpacity>
         </View>
-
       </View>
     )    
   }
 }
 
+const styles = StyleSheet.create({
+  startQuizBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: '#fff',
+    backgroundColor: qiitaGreen,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+    padding: 20,
+    minWidth: 200,
+  },
+  addCardBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: '#fff',
+    backgroundColor: orange,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+    padding: 20,
+    minWidth: 200,
+  }
+})
 
 const mapStateToProps = (state) => {
   return {

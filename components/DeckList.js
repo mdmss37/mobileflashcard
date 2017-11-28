@@ -56,7 +56,7 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.center, { height: 20, marginTop: 10}]}>
+        <View style={[styles.center, { height: 20, marginTop: 30, marginBottom: 10}]}>
           <Text style={styles.titleStyle}>Your flash card decks</Text>
         </View>
         { decksLength > 0 
