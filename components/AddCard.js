@@ -8,9 +8,11 @@ import {
   StyleSheet,
   Keyboard 
 } from 'react-native'
-import { purple, lightPurp, lightGray, gray } from '../utils/colors'
+import { purple, lightPurp, lightGray, gray, orange, white } from '../utils/colors'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import { addCardToDeck } from '../utils/api'
+import { addCard } from '../actions'
 
 class AddCard extends Component {
   state = {
@@ -19,6 +21,25 @@ class AddCard extends Component {
     question: '',
     answer: '',
   }
+
+
+  handleSubmit = () => {
+    const { question, answer } = this.state
+    const card = { question, answer }
+    const { title } = this.props.navigation.state.params
+    if (question !== '' && answer !== '') {
+      addCardToDeck(title, card)
+        .then(() => {
+          this.props.dispatch(addCard(title, card))
+          this.setState({
+            question: '',
+            answer: '',
+          })
+        })
+      this.props.navigation.goBack()
+    }
+  }
+
   // https://facebook.github.io/react-native/docs/textinput.html
   render() {
     return (
@@ -43,7 +64,9 @@ class AddCard extends Component {
             value={this.state.answer}
             style={[styles.textInput, {borderColor: `${this.state.answerBorderColor}`}]}
             />
-
+          <TouchableOpacity style={styles.submitCardBtn} onPress={this.handleSubmit}>
+            <Text style={{color: white, textAlign: 'center' }}>Add your card to deck</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>
     )    
@@ -57,14 +80,22 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderRadius: 4,
+  },
+  submitCardBtn: {
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: '#fff',
+    backgroundColor: orange,
+    padding: 20,
+    minWidth: 200,
   }
 })
 
 
 function mapStateToProps(state) {
-  return state
+  return {
+    decks: state
+  }
 }
-
-
 
 export default connect(mapStateToProps)(AddCard)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { purple, qiitaGreen, orange } from '../utils/colors'
+import { purple, qiitaGreen, orange, white } from '../utils/colors'
 import { connect } from 'react-redux'
 import { pluralize } from '../utils/helpers'
 
@@ -20,10 +20,10 @@ class Deck extends Component {
             </Text>          
           </View>
           <TouchableOpacity style={styles.startQuizBtn}>
-            <Text style={{textAlign: 'center', fontSize: 25}}>Start quiz</Text>
+            <Text style={{textAlign: 'center', fontSize: 25, color: white}}>Start quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.addCardBtn} onPress={() => navigation.navigate('AddCard', { title })}>
-            <Text style={{textAlign: 'center', fontSize: 25}}>Add new card</Text>
+            <Text style={{textAlign: 'center', fontSize: 25, color: white}}>Add new card</Text>
           </TouchableOpacity>
         </View>
       </View>

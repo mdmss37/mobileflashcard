@@ -41,14 +41,32 @@ export function getDecks() {
     })
 }
 
-export function getDeck() {
-  
+export function getDeck(title) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((result) => {
+      const decks = JSON.parse(result)
+      const deck = decks[title]
+      return deck
+    })
 }
 
-export function saveDeckTitle() {
-  
+export function saveDeckTitle(title) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [title]: {
+      title: title,
+      questions: [],
+    }
+  }))
 }
 
-export function addCardToDeck() {
-  
+export function addCardToDeck(title, card) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((result) => {
+      const decks = JSON.parse(result)
+      const deck = decks[title]
+      deck.questions.push(card)
+      return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+        [title]: { ...deck }
+      }))
+    })
 }
