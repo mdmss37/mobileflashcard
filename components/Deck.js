@@ -19,7 +19,7 @@ class Deck extends Component {
               {pluralize(deck.questions.length, 'card')}
             </Text>          
           </View>
-          <TouchableOpacity style={styles.startQuizBtn}>
+          <TouchableOpacity style={styles.startQuizBtn} onPress={() => navigation.navigate('Quiz', { title })}>
             <Text style={{textAlign: 'center', fontSize: 25, color: white}}>Start quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.addCardBtn} onPress={() => navigation.navigate('AddCard', { title })}>
