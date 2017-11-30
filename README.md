@@ -1,6 +1,12 @@
 
 
 + https://facebook.github.io/react-native/docs/flatlist.html
+flip card
++ https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
++ https://www.npmjs.com/package/react-native-flip-card
++ http://browniefed.com/react-native-animation-book/api/ANIMATED_ADDLISTENER.html
+
+
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
