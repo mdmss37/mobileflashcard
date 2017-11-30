@@ -22,7 +22,6 @@ class AddCard extends Component {
     answer: '',
   }
 
-
   handleSubmit = () => {
     const { question, answer } = this.state
     const card = { question, answer }

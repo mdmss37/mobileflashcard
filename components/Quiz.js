@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native'
-import { purple, white, udacityBlue, red } from '../utils/colors'
+import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../utils/colors'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
+import { pluralize } from '../utils/helpers'
+import { 
+  setLocalNotification, 
+  clearLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
   state = {
     answers: undefined,
     ready: false,
     questionIdx: 0,
-    isShowingAnswer: false,
     finishedQuiz: false
   }
 
@@ -35,6 +38,19 @@ class Quiz extends Component {
     this.setState({
       answers,
       ready: true,
+    })
+    clearLocalNotification()
+      .then(setLocalNotification())
+  }
+
+  handleRestartGame = () => {
+    const questions = this.props.deck.questions
+    const answers = Array(questions.length).fill(undefined)
+    this.animatedValue.setValue(0)
+    this.setState({
+      answers,
+      questionIdx: 0,
+      finishedQuiz: false
     })
   }
 
@@ -79,16 +95,19 @@ class Quiz extends Component {
     }
   }
 
+  countElement = (arr, element) => arr.filter((elem) => elem === element).length
+
   render() {
-    if (this.state.ready === false) {
+    const { questions } = this.props.deck
+    const { answers, questionIdx, isShowingAnswer, finishedQuiz, ready } = this.state
+
+    if (ready === false || !answers) {
       return <AppLoading />
     }
-    const { questions } = this.props.deck
-    const { answers, questionIdx, isShowingAnswer, finishedQuiz } = this.state
 
     if (answers.length === 0) {
       return (
-        <View>
+        <View style={styles.container}>
           <Text>There are no cards in the deck, please add card</Text>  
         </View>
       )
@@ -107,14 +126,36 @@ class Quiz extends Component {
     }
 
     const { question, answer } = questions[questionIdx]
-    console.log(this.value)
-    console.log(this.animatedValue)
+
     return (
       <View style={styles.container}>
       { finishedQuiz
         ?
-        <View style={styles.container}>
-          <Text>You finished quiz</Text>
+        <View style={{flex: 1, padding: 20}}>
+          <View style={{flex: 3, justifyContent: 'center'}}>
+            <Text style={{textAlign: 'center', fontSize: 40}}>
+              You finished quiz
+            </Text>
+            <Text style={{textAlign: 'center', fontSize: 20}}>
+              {this.countElement(answers, true)} correct out of {pluralize(questions.length, 'question')}
+            </Text>          
+          </View>
+          <View style={{flex: 1}}>
+            <TouchableOpacity 
+              style={styles.restartQuizBtn}
+              onPress={this.handleRestartGame}>
+              <Text style={{textAlign: 'center', fontSize: 25, color: white}}>
+                Click to restart flash card
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={[styles.restartQuizBtn, {marginTop: 20, marginBottom: 20, backgroundColor: orange}]}
+              onPress={() => this.props.navigation.goBack()}>
+              <Text style={{textAlign: 'center', fontSize: 25, color: white}}>
+                Go back to Deck
+              </Text>
+            </TouchableOpacity>            
+          </View>
         </View>
         :
         <View style={styles.container}>
@@ -127,9 +168,9 @@ class Quiz extends Component {
               <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{answer}</Text>  
             </Animated.View>            
           </View>
-          <TouchableOpacity onPress={this.handleFlipCard}>
+          <TouchableOpacity style={{marginTop: 20}} onPress={this.handleFlipCard}>
             <Text style={{fontSize: 20, textAlign: 'center', color: red, fontWeight: 'bold'}}>
-              {this.value >= 90 ? "Click to show question" : "Click to show answer" }
+              Click to flip card
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#0F7F12'}]} onPress={() => this.handleAnswerSubmit(true)}>
@@ -139,7 +180,7 @@ class Quiz extends Component {
             <Text style={{color: white, textAlign: 'center' }}>I didn't know this</Text>
           </TouchableOpacity>
         </View>
-      }        
+      } 
       </View>
     )    
   }
@@ -164,19 +205,32 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     padding: 20,
     width: 200,
+    marginTop: 10,
+    marginBottom: 10,
   },
   flipCard: {
     width: 200,
     height: 200,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: lightGray,
     backfaceVisibility: 'hidden',
   },
   flipCardBack: {
-    backgroundColor: "red",
+    backgroundColor: lightGray,
     position: "absolute",
     top: 0,
+  },
+  restartQuizBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: '#fff',
+    backgroundColor: qiitaGreen,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    minWidth: 200,
   },
 })
 
