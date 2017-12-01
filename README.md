@@ -16,8 +16,8 @@ Objective is to learn how to use react native to develop native app.
 + deal with android platform
 + add test to avoid regression(check test framework for JS)
 
-
 # References
++ https://docs.expo.io/versions/latest/index.html
 + https://facebook.github.io/react-native/docs/flatlist.html
 * flip card
 + https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
