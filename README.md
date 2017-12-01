@@ -8,12 +8,14 @@ Objective is to learn how to use react native to develop native app.
 
 # TODO
 + refactor code
+++ extract style to separate file
 + better frontend set up with more interactive UI
 + shuffle card order
 + more card
 + record score
 + deal with android platform
 + add test to avoid regression(check test framework for JS)
+
 
 # References
 + https://facebook.github.io/react-native/docs/flatlist.html

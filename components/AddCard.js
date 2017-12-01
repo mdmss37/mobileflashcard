@@ -9,6 +9,7 @@ import {
   Keyboard 
 } from 'react-native'
 import { purple, lightPurp, lightGray, gray, orange, white } from '../style/colors'
+import { containers } from '../style/containers'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { addCardToDeck } from '../utils/api'
@@ -42,8 +43,8 @@ class AddCard extends Component {
   // https://facebook.github.io/react-native/docs/textinput.html
   render() {
     return (
-      <View style={[styles.container, {padding: 20}]} onTouchStart={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={[styles.container, {padding: 10}]} behavior='padding'>
+      <View style={[containers.baseContainer, {padding: 20}]} onTouchStart={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={[containers.baseContainer, {padding: 10}]} behavior='padding'>
           <TextInput
             multiline={true}
             placeholder='Please input question'
@@ -73,9 +74,6 @@ class AddCard extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   textInput: {
     fontSize: 20,
     padding: 10,

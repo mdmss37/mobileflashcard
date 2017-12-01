@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StyleSheet } from 'react-native'
 import { purple, orange, gray, lightGray, white, udacityBlue } from '../style/colors'
+import { containers } from '../style/containers'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
@@ -34,8 +35,8 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, padding: 20}} onTouchStart={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={{flex: 1, padding: 10}} behavior='padding'>
+      <View style={[containers.baseContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={[containers.baseContainer, { padding: 10 }]} behavior='padding'>
           <TextInput
             multiline={true}
             placeholder='Please input title of your deck'

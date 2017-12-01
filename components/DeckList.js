@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, Platform, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { purple } from '../style/colors'
+import { containers } from '../style/containers'
 import { connect } from 'react-redux'
 import { recieveDecks } from '../actions'
 import { getDecks } from '../utils/api'
@@ -55,8 +56,8 @@ class DeckList extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={[styles.center, { height: 20, marginTop: 30, marginBottom: 10}]}>
+      <View style={containers.columnContainer}>
+        <View style={[containers.centerContainer, { flex: 0, marginTop: 30, marginBottom: 10}]}>
           <Text style={styles.titleStyle}>Your flash card decks</Text>
         </View>
         { decksLength > 0 
@@ -83,15 +84,6 @@ class DeckList extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-  },
-  center: {
-    flex: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   listItem: {
     flex: 1,
     justifyContent: 'center',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../style/colors'
+import { containers } from '../style/containers'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 import { pluralize } from '../utils/helpers'
@@ -128,10 +129,10 @@ class Quiz extends Component {
     const { question, answer } = questions[questionIdx]
 
     return (
-      <View style={styles.container}>
+      <View style={containers.centerContainer}>
       { finishedQuiz
         ?
-        <View style={{flex: 1, padding: 20}}>
+        <View style={[containers.baseContainer, {padding: 20}]}>
           <View style={{flex: 3, justifyContent: 'center'}}>
             <Text style={{textAlign: 'center', fontSize: 40}}>
               You finished quiz
@@ -140,7 +141,7 @@ class Quiz extends Component {
               {this.countElement(answers, true)} correct out of {pluralize(questions.length, 'question')}
             </Text>          
           </View>
-          <View style={{flex: 1}}>
+          <View style={containers.baseContainer}>
             <TouchableOpacity 
               style={styles.restartQuizBtn}
               onPress={this.handleRestartGame}>
@@ -158,7 +159,7 @@ class Quiz extends Component {
           </View>
         </View>
         :
-        <View style={styles.container}>
+        <View style={containers.centerContainer}>
           <Text>Question: {`${questionIdx + 1}/${questions.length}`}</Text>
           <View>
             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
@@ -187,11 +188,6 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   textInput: {
     fontSize: 20,
     padding: 10,

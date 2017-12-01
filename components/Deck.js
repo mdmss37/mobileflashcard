@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { purple, qiitaGreen, orange, white } from '../style/colors'
+import { containers } from '../style/containers'
 import { connect } from 'react-redux'
 import { pluralize } from '../utils/helpers'
 
@@ -12,9 +13,9 @@ class Deck extends Component {
     const deck = decks[title]
     console.log(deck)
     return (
-      <View style={{flex: 1, padding: 40}}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={{flex: 5, justifyContent: 'center'}}>
+      <View style={[containers.baseContainer, { padding: 40 }]}>
+        <View style={containers.centerContainer}>
+          <View style={[containers.centerContainer, { flex: 5 }]}>
             <Text style={{textAlign: 'center', fontSize: 60}}>{title}</Text>
             <Text style={{textAlign: 'center', fontSize: 40}}>
               {pluralize(deck.questions.length, 'card')}
