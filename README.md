@@ -16,16 +16,16 @@ Objective is to learn how to use react native to develop native app.
 + add test to avoid regression(check test framework for JS)
 
 # References
-official
+- official
   + https://docs.expo.io/versions/latest/index.html
   + https://facebook.github.io/react-native/docs/flatlist.html
-flip card
+- flip card
   + https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
   + https://www.npmjs.com/package/react-native-flip-card
   + http://browniefed.com/react-native-animation-book/api/ANIMATED_ADDLISTENER.html
-clear AsyncStorage
-  + https://facebook.github.io/react-native/docs/asyncstorage.html#clear
-reference from reviewer
+- clear AsyncStorage
+    + https://facebook.github.io/react-native/docs/asyncstorage.html#clear
+- references from reviewer
   + https://medium.com/the-react-native-log/change-default-launch-screen-in-react-native-ios-app-544f94f1e947
   + https://hackernoon.com/manage-react-native-project-folder-structure-and-simplify-the-code-c98da77ef792
   + https://stackoverflow.com/questions/34965856/what-is-the-point-of-the-constants-in-redux
