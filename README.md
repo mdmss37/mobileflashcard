@@ -28,3 +28,4 @@ Objective is to learn how to use react native to develop native app.
 * reference from reviewer
 + https://medium.com/the-react-native-log/change-default-launch-screen-in-react-native-ios-app-544f94f1e947
 + https://hackernoon.com/manage-react-native-project-folder-structure-and-simplify-the-code-c98da77ef792
++ https://stackoverflow.com/questions/34965856/what-is-the-point-of-the-constants-in-redux
