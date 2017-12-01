@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { purple, qiitaGreen, orange, white } from '../utils/colors'
+import { purple, qiitaGreen, orange, white } from '../style/colors'
 import { connect } from 'react-redux'
 import { pluralize } from '../utils/helpers'
 
 class Deck extends Component {
   render() {
     const { navigation, decks } = this.props
+    console.log(decks)
     const title = navigation.state.params.title
     const deck = decks[title]
     console.log(deck)
@@ -58,10 +59,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = (state) => {
-  return {
-    decks: state,
-  }
+function mapStateToProps(decks) {
+  return { decks }
 }
 
 export default connect(mapStateToProps)(Deck)

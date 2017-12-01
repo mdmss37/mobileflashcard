@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, Platform, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { purple } from '../utils/colors'
+import { purple } from '../style/colors'
 import { connect } from 'react-redux'
 import { recieveDecks } from '../actions'
 import { getDecks } from '../utils/api'
@@ -119,11 +119,8 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps(state) {
-  return {
-    decks: state
-  }
+function mapStateToProps(decks) {
+  return { decks }
 }
 
 export default connect(mapStateToProps)(DeckList)
-

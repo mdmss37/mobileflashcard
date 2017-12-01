@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet } from 'react-native'
-import { purple, orange, gray, lightGray, white, udacityBlue } from '../utils/colors'
+import { purple, orange, gray, lightGray, white, udacityBlue } from '../style/colors'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
@@ -72,10 +72,8 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps(state) {
-  return {
-    decks: state,
-  }
+function mapStateToProps(decks) {
+  return { decks }
 }
 
 export default connect(mapStateToProps)(AddDeck)

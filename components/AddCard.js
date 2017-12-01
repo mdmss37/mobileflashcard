@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Keyboard 
 } from 'react-native'
-import { purple, lightPurp, lightGray, gray, orange, white } from '../utils/colors'
+import { purple, lightPurp, lightGray, gray, orange, white } from '../style/colors'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { addCardToDeck } from '../utils/api'
@@ -42,8 +42,8 @@ class AddCard extends Component {
   // https://facebook.github.io/react-native/docs/textinput.html
   render() {
     return (
-      <View style={{flex: 1, padding: 20}} onTouchStart={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={{flex: 1, padding: 10}} behavior='padding'>
+      <View style={[styles.container, {padding: 20}]} onTouchStart={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={[styles.container, {padding: 10}]} behavior='padding'>
           <TextInput
             multiline={true}
             placeholder='Please input question'
@@ -73,6 +73,9 @@ class AddCard extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   textInput: {
     fontSize: 20,
     padding: 10,
@@ -90,11 +93,16 @@ const styles = StyleSheet.create({
   }
 })
 
+// Passing the state, and any other argument is optional, 
+// as you can pass individual reducers into your state using the following practices:
+//  function mapStateToProps({ reducer1, reducer2 }){
+//     return { reducer1, reducer2 };
+// }
+// Make sure your argument names match your return assignment names :squirrel:
+// Utilizing ES6 in this situation is helpful since it helps you shorten your code 
 
-function mapStateToProps(state) {
-  return {
-    decks: state
-  }
+function mapStateToProps(decks) {
+  return { decks }
 }
 
 export default connect(mapStateToProps)(AddCard)

@@ -4,7 +4,7 @@ import { Constants } from 'expo'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-import { udacityBlue } from './utils/colors'
+import { udacityBlue } from './style/colors'
 import { Navigator } from './components/Navigator'
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
@@ -30,4 +30,3 @@ export default class App extends React.Component {
     );
   }
 }
-

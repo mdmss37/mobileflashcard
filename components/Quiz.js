@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native'
-import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../utils/colors'
+import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../style/colors'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 import { pluralize } from '../utils/helpers'
@@ -234,10 +234,10 @@ const styles = StyleSheet.create({
   },
 })
 
-function mapStateToProps(state, { navigation }) {
+function mapStateToProps(decks, { navigation }) {
   const title = navigation.state.params.title
   return {
-    deck: state[title]
+    deck: decks[title],
   }
 }
 
