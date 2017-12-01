@@ -28,7 +28,8 @@ class AddDeck extends Component {
           this.setState({
             title: ''
           })
-          this.props.navigation.navigate('DeckList')
+          // navigate to added Deck
+          this.props.navigation.navigate('Deck', { title })
       })
     }
   }
