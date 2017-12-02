@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native
 import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../style/colors'
 import { containers } from '../style/containers'
 import { texts } from '../style/texts'
+import { buttons } from '../style/buttons'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 import { pluralize } from '../utils/helpers'
@@ -32,6 +33,10 @@ class Quiz extends Component {
       inputRange: [0, 180],
       outputRange: ['180deg', '360deg']
     })    
+  }
+
+  componentWillUnmount() {
+    this.animatedValue.removeAllListeners()
   }
 
   componentDidMount() {
@@ -109,7 +114,7 @@ class Quiz extends Component {
 
     if (answers.length === 0) {
       return (
-        <View style={styles.container}>
+        <View style={containers.centerContainer}>
           <Text>There are no cards in the deck, please add card</Text>  
         </View>
       )
@@ -133,8 +138,8 @@ class Quiz extends Component {
       <View style={containers.centerContainer}>
       { finishedQuiz
         ?
-        <View style={[containers.baseContainer, {padding: 20}]}>
-          <View style={{flex: 3, justifyContent: 'center'}}>
+        <View style={[containers.centerContainer, {padding: 20}]}>
+          <View style={{marginBottom: 20}}>
             <Text style={{textAlign: 'center', fontSize: 40}}>
               You finished quiz
             </Text>
@@ -142,16 +147,16 @@ class Quiz extends Component {
               {this.countElement(answers, true)} correct out of {pluralize(questions.length, 'question')}
             </Text>          
           </View>
-          <View style={containers.baseContainer}>
+          <View>
             <TouchableOpacity 
-              style={styles.restartQuizBtn}
+              style={buttons.baseBtn}
               onPress={this.handleRestartGame}>
               <Text style={[texts.centerBold, { color: white, fontSize: 20 }]}>
                 Click to restart flash card
               </Text>
             </TouchableOpacity>
             <TouchableOpacity 
-              style={[styles.restartQuizBtn, {marginTop: 20, marginBottom: 20, backgroundColor: orange}]}
+              style={[buttons.baseBtn, {marginTop: 20, marginBottom: 20, backgroundColor: orange}]}
               onPress={() => this.props.navigation.goBack()}>
               <Text style={[texts.centerBold, { color: white, fontSize: 20}]}>
                 Go back to Deck
@@ -177,10 +182,10 @@ class Quiz extends Component {
               Click to flip card
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#0F7F12'}]} onPress={() => this.handleAnswerSubmit(true)}>
+          <TouchableOpacity style={[buttons.baseBtn, { backgroundColor:'#0F7F12', marginTop: 20}]} onPress={() => this.handleAnswerSubmit(true)}>
             <Text style={[texts.centerBold, { color: white }]}>I knew this</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#D22A25'}]} onPress={() => this.handleAnswerSubmit(false)}>
+          <TouchableOpacity style={[buttons.baseBtn, {backgroundColor:'#D22A25', marginTop: 20}]} onPress={() => this.handleAnswerSubmit(false)}>
             <Text style={[texts.centerBold, { color: white }]}>I didn't know this</Text>
           </TouchableOpacity>
         </View>
@@ -191,22 +196,6 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-  textInput: {
-    fontSize: 20,
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 4,
-  },
-  submitBtn: {
-    borderWidth: 1,
-    borderRadius: 16,
-    borderColor: '#fff',
-    padding: 20,
-    width: 200,
-    marginTop: 10,
-    marginBottom: 10,
-  },
   flipCard: {
     width: 200,
     height: 200,
@@ -219,17 +208,6 @@ const styles = StyleSheet.create({
     backgroundColor: lightGray,
     position: "absolute",
     top: 0,
-  },
-  restartQuizBtn: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius: 16,
-    borderColor: '#fff',
-    backgroundColor: qiitaGreen,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    minWidth: 200,
   },
 })
 

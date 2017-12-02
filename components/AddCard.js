@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { purple, lightPurp, lightGray, gray, orange, white } from '../style/colors'
 import { containers } from '../style/containers'
+import { texts } from '../style/texts'
+import { buttons } from '../style/buttons'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { addCardToDeck } from '../utils/api'
@@ -43,8 +45,8 @@ class AddCard extends Component {
   // https://facebook.github.io/react-native/docs/textinput.html
   render() {
     return (
-      <View style={[containers.baseContainer, {padding: 20}]} onTouchStart={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={[containers.baseContainer, {padding: 10}]} behavior='padding'>
+      <View style={containers.centerContainer} onTouchStart={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={[containers.centerContainer, {padding: 10}]} behavior='padding'>
           <TextInput
             multiline={true}
             placeholder='Please input question'
@@ -52,7 +54,7 @@ class AddCard extends Component {
             onBlur={() => this.setState({ questionBorderColor: lightGray })}
             onChangeText={(question) => this.setState({question})}
             value={this.state.question}
-            style={[styles.textInput, {borderColor: `${this.state.questionBorderColor}`}]}
+            style={[texts.textInput, {borderColor: `${this.state.questionBorderColor}`}]}
             />
 
           <TextInput
@@ -62,34 +64,16 @@ class AddCard extends Component {
             onBlur={() => this.setState({ answerBorderColor: lightGray })}
             onChangeText={(answer) => this.setState({answer})}
             value={this.state.answer}
-            style={[styles.textInput, {borderColor: `${this.state.answerBorderColor}`}]}
+            style={[texts.textInput, {borderColor: `${this.state.answerBorderColor}`}]}
             />
-          <TouchableOpacity style={styles.submitCardBtn} onPress={this.handleSubmit}>
-            <Text style={{color: white, textAlign: 'center' }}>Add your card to deck</Text>
+          <TouchableOpacity style={[buttons.baseBtn, { padding: 20, backgroundColor: orange}]} onPress={this.handleSubmit}>
+            <Text style={[texts.centerBold, { color: white }]}>Add your card to deck</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>
     )    
   }
 }
-
-const styles = StyleSheet.create({
-  textInput: {
-    fontSize: 20,
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 4,
-  },
-  submitCardBtn: {
-    borderWidth: 1,
-    borderRadius: 16,
-    borderColor: '#fff',
-    backgroundColor: orange,
-    padding: 20,
-    minWidth: 200,
-  }
-})
 
 // Passing the state, and any other argument is optional, 
 // as you can pass individual reducers into your state using the following practices:

@@ -10,6 +10,7 @@ import {
 import { purple, orange, gray, lightGray, white, udacityBlue } from '../style/colors'
 import { containers } from '../style/containers'
 import { texts } from '../style/texts'
+import { buttons } from '../style/buttons'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
@@ -49,7 +50,7 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View style={[containers.centerContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
+      <View style={[containers.baseContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
         <KeyboardAvoidingView style={[containers.centerContainer, { padding: 10 }]} behavior='padding'>
           <Text style={{fontSize: 25, marginBottom: 20}}>New deck</Text>
           <TextInput
@@ -59,34 +60,17 @@ class AddDeck extends Component {
             onBlur={() => this.setState({ inputBorderColor: lightGray })}
             onChangeText={(title) => this.setState({title})}
             value={this.state.title}
-            style={[styles.textInput, {borderColor: `${this.state.inputBorderColor}`}]}
+            style={[texts.textInput, {borderColor: `${this.state.inputBorderColor}`}]}
             />
-          <TouchableOpacity style={styles.submitDeckBtn} onPress={this.handleSubmit}>
+          <TouchableOpacity style={[buttons.baseBtn, { padding: 20, backgroundColor: udacityBlue}]} onPress={this.handleSubmit}>
             <Text style={[texts.centerBold, { color: white }]}>Add your new deck</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>          
         </KeyboardAvoidingView>
+
       </View>
     )    
   }
 }
-
-const styles = StyleSheet.create({
-  textInput: {
-    fontSize: 20,
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 4,
-  },
-  submitDeckBtn: {
-    borderWidth: 1,
-    borderRadius: 16,
-    borderColor: '#fff',
-    backgroundColor: udacityBlue,
-    padding: 20,
-    minWidth: 200,
-  }
-})
 
 const mapStateToProps = (decks) => ({ decks })
 

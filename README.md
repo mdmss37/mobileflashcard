@@ -10,7 +10,7 @@ Objective is to learn how to use react native to develop native app.
 + extract style to separate file
 + better frontend set up with more interactive UI
 + shuffle card order
-+ more card
++ more cards(import cards?)
 + record score
 + deal with android platform
 + add test to avoid regression(check test framework for JS)
@@ -35,3 +35,7 @@ Objective is to learn how to use react native to develop native app.
   + https://github.com/react-community/react-navigation/issues/1815
   + https://github.com/react-community/react-navigation/pull/2712
   + https://www.codementor.io/blessingoraz/understanding-navigation-in-react-native-a3wlcxmzu
+- react native animation
+  + http://browniefed.com/react-native-animation-book/api/ANIMATED_REMOVE_LISTENERS.html
+
+

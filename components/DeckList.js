@@ -14,7 +14,9 @@ const DeckListItem = ({ navigation, title, questionNum }) => {
       onPress={() => navigation.navigate('Deck', { title } )}>
       <View style={styles.listItem}>
         <Text style={{fontSize: 30}}>{title}</Text>
-        <Text style={styles.cardNumberDesc}>This deck has {pluralize(questionNum, 'card')}</Text>
+        <Text style={{fontSize: 20, color: '#BBB'}}>
+          This deck has {pluralize(questionNum, 'card')}
+        </Text>
       </View>
     </TouchableOpacity>
   )
@@ -101,10 +103,6 @@ const styles = StyleSheet.create({
       height: 5,
     }
   },
-  cardNumberDesc: {
-    fontSize: 20,
-    color: '#BBB',
-  }
 })
 
 const mapStateToProps = (decks) => ({ decks })

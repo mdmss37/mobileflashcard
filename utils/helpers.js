@@ -4,16 +4,16 @@ import { AsyncStorage } from 'react-native'
 const NOTIFICATION_KEY = 'Flashcard:Notifications'
 
 
-export function pluralize(num, thing) {
+export const pluralize = (num, thing) => {
   return num === 1 ? `${num} ${thing}` : `${num} ${thing}s`
 }
 
-export function clearLocalNotification() {
+export const  clearLocalNotification = () => {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
     .then(Notifications.cancelAlllScheduledNotificationsAsync)
 } 
 
-function createNotification() {
+const createNotification = () => {
   return {
     title: "Practice makes Perfect",
     body: "👋 to retain your memory, please try flash card everyday!",
@@ -29,7 +29,7 @@ function createNotification() {
   }
 }
 
-export function setLocalNotification() {
+export const setLocalNotification = () => {
   AsyncStorage.getItem(NOTIFICATION_KEY)
   .then(JSON.parse)
   .then((data) => {
