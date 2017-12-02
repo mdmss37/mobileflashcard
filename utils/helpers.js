@@ -14,7 +14,6 @@ export function clearLocalNotification() {
 } 
 
 function createNotification() {
-  console.log("createNotification")
   return {
     title: "Practice makes Perfect",
     body: "👋 to retain your memory, please try flash card everyday!",
@@ -34,11 +33,9 @@ export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
   .then(JSON.parse)
   .then((data) => {
-    console.log(data)
     if (data === null) {
       Permissions.askAsync(Permissions.NOTIFICATIONS)
         .then(({ status }) => {
-          console.log(status)
           if (status === 'granted' || status === 'undetermined') {
             Notifications.cancelAllScheduledNotificationsAsync()
             let tommorrow = new Date()
@@ -56,8 +53,6 @@ export function setLocalNotification() {
               notificationSchedule,
             )
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
-            console.log("Notification set")
-            console.log(notificationSchedule)
           }
         })
     }
