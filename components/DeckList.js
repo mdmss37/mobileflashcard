@@ -13,7 +13,7 @@ const DeckListItem = ({ navigation, title, questionNum }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate('Deck', { title } )}>
       <View style={styles.listItem}>
-        <Text style={styles.titleStyle}>{title}</Text>
+        <Text style={{fontSize: 30}}>{title}</Text>
         <Text style={styles.cardNumberDesc}>This deck has {pluralize(questionNum, 'card')}</Text>
       </View>
     </TouchableOpacity>
@@ -48,7 +48,6 @@ class DeckList extends Component {
     const { decks } = this.props
     const decksLength = Object.keys(decks).length
     const decksArray = Object.keys(decks).map((key) => decks[key])
-    console.log(decksArray)
     const { ready } = this.state
 
     if (ready === false) {
@@ -56,9 +55,9 @@ class DeckList extends Component {
     }
 
     return (
-      <View style={containers.columnContainer}>
+      <View style={[containers.columnContainer, {paddingLeft: 5, paddingRight: 5}]}>
         <View style={[containers.centerContainer, { flex: 0, marginTop: 30, marginBottom: 10}]}>
-          <Text style={styles.titleStyle}>Your flash card decks</Text>
+          <Text style={{ fontSize: 30 }}>Your flash card decks</Text>
         </View>
         { decksLength > 0 
           ?
@@ -102,17 +101,12 @@ const styles = StyleSheet.create({
       height: 5,
     }
   },
-  titleStyle: {
-    fontSize: 30,
-  },
   cardNumberDesc: {
     fontSize: 20,
     color: '#BBB',
   }
 })
 
-function mapStateToProps(decks) {
-  return { decks }
-}
+const mapStateToProps = (decks) => ({ decks })
 
 export default connect(mapStateToProps)(DeckList)

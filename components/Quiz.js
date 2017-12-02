@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import { purple, white, udacityBlue, red, qiitaGreen, lightGray, orange } from '../style/colors'
 import { containers } from '../style/containers'
+import { texts } from '../style/texts'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 import { pluralize } from '../utils/helpers'
@@ -145,14 +146,14 @@ class Quiz extends Component {
             <TouchableOpacity 
               style={styles.restartQuizBtn}
               onPress={this.handleRestartGame}>
-              <Text style={{textAlign: 'center', fontSize: 25, color: white}}>
+              <Text style={[texts.centerWhite, { fontSize: 25 }]}>
                 Click to restart flash card
               </Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.restartQuizBtn, {marginTop: 20, marginBottom: 20, backgroundColor: orange}]}
               onPress={() => this.props.navigation.goBack()}>
-              <Text style={{textAlign: 'center', fontSize: 25, color: white}}>
+              <Text style={[texts.centerWhite, {fontSize: 25}]}>
                 Go back to Deck
               </Text>
             </TouchableOpacity>            
@@ -163,27 +164,27 @@ class Quiz extends Component {
           <Text>Question: {`${questionIdx + 1}/${questions.length}`}</Text>
           <View>
             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{question}</Text>  
+              <Text style={texts.centerBold}>{question}</Text>  
             </Animated.View>
             <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-              <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{answer}</Text>  
+              <Text style={texts.centerBold}>{answer}</Text>  
             </Animated.View>            
           </View>
           <TouchableOpacity style={{marginTop: 20}} onPress={this.handleFlipCard}>
-            <Text style={{fontSize: 20, textAlign: 'center', color: red, fontWeight: 'bold'}}>
+            <Text style={[texts.centerBold, { color: red }]}>
               Click to flip card
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#0F7F12'}]} onPress={() => this.handleAnswerSubmit(true)}>
-            <Text style={{color: white, textAlign: 'center' }}>I knew this</Text>
+            <Text style={texts.centerWhite}>I knew this</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#D22A25'}]} onPress={() => this.handleAnswerSubmit(false)}>
-            <Text style={{color: white, textAlign: 'center' }}>I didn't know this</Text>
+            <Text style={texts.centerWhite}>I didn't know this</Text>
           </TouchableOpacity>
         </View>
       } 
       </View>
-    )    
+    ) 
   }
 }
 
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
   },
 })
 
-function mapStateToProps(decks, { navigation }) {
+const mapStateToProps = (decks, { navigation }) => {
   const title = navigation.state.params.title
   return {
     deck: decks[title],

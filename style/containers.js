@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native'
 
-
 export const containers = StyleSheet.create({
   baseContainer: {
     flex: 1

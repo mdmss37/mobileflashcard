@@ -99,8 +99,6 @@ const styles = StyleSheet.create({
 // Make sure your argument names match your return assignment names :squirrel:
 // Utilizing ES6 in this situation is helpful since it helps you shorten your code 
 
-function mapStateToProps(decks) {
-  return { decks }
-}
+const mapStateToProps = (decks) => ({ decks })
 
 export default connect(mapStateToProps)(AddCard)

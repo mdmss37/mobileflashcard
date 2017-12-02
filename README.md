@@ -31,3 +31,7 @@ Objective is to learn how to use react native to develop native app.
   + https://stackoverflow.com/questions/34965856/what-is-the-point-of-the-constants-in-redux
 - markdown
   + https://qiita.com/higuma/items/3344387e0f2cce7f2cfe
+- How to handle back navigation butteon after navigate
+  + https://github.com/react-community/react-navigation/issues/1815
+  + https://github.com/react-community/react-navigation/pull/2712
+  + https://www.codementor.io/blessingoraz/understanding-navigation-in-react-native-a3wlcxmzu

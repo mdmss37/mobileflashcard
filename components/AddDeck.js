@@ -24,7 +24,7 @@ class AddDeck extends Component {
     if (title !== '') {
       saveDeckTitle(title)
         .then(() => {
-          this.props.dispatch(addDeck(title))
+          this.props.addDeck(title)
           this.setState({
             title: ''
           })
@@ -36,8 +36,9 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View style={[containers.baseContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={[containers.baseContainer, { padding: 10 }]} behavior='padding'>
+      <View style={[containers.centerContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={[containers.centerContainer, { padding: 10 }]} behavior='padding'>
+          <Text style={{marginBottom: 20}}>New deck</Text>
           <TextInput
             multiline={true}
             placeholder='Please input title of your deck'
@@ -74,8 +75,6 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps(decks) {
-  return { decks }
-}
+const mapStateToProps = (decks) => ({ decks })
 
-export default connect(mapStateToProps)(AddDeck)
+export default connect(mapStateToProps, { addDeck })(AddDeck)
