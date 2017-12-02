@@ -9,15 +9,28 @@ import {
   StyleSheet } from 'react-native'
 import { purple, orange, gray, lightGray, white, udacityBlue } from '../style/colors'
 import { containers } from '../style/containers'
+import { texts } from '../style/texts'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
+import { NavigationActions } from 'react-navigation'
 
 class AddDeck extends Component {
   state = {
     title: '',
     inputBorderColor: lightGray
   }
+
+  resetAction = (title) => (NavigationActions.reset({
+    index: 1,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Home'}),
+      NavigationActions.navigate({ 
+        routeName: 'Deck',
+        params: { title }
+      })
+    ]
+  }))
 
   handleSubmit = () => {
     const { title } = this.state
@@ -29,7 +42,7 @@ class AddDeck extends Component {
             title: ''
           })
           // navigate to added Deck
-          this.props.navigation.navigate('Deck', { title })
+          this.props.navigation.dispatch(this.resetAction(title))
       })
     }
   }
@@ -38,7 +51,7 @@ class AddDeck extends Component {
     return (
       <View style={[containers.centerContainer, { padding: 20 }]} onTouchStart={Keyboard.dismiss}>
         <KeyboardAvoidingView style={[containers.centerContainer, { padding: 10 }]} behavior='padding'>
-          <Text style={{marginBottom: 20}}>New deck</Text>
+          <Text style={{fontSize: 25, marginBottom: 20}}>New deck</Text>
           <TextInput
             multiline={true}
             placeholder='Please input title of your deck'
@@ -49,7 +62,7 @@ class AddDeck extends Component {
             style={[styles.textInput, {borderColor: `${this.state.inputBorderColor}`}]}
             />
           <TouchableOpacity style={styles.submitDeckBtn} onPress={this.handleSubmit}>
-            <Text style={{color: white, textAlign: 'center' }}>Add your new deck</Text>
+            <Text style={[texts.centerBold, { color: white }]}>Add your new deck</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>

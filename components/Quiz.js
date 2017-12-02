@@ -146,14 +146,14 @@ class Quiz extends Component {
             <TouchableOpacity 
               style={styles.restartQuizBtn}
               onPress={this.handleRestartGame}>
-              <Text style={[texts.centerWhite, { fontSize: 25 }]}>
+              <Text style={[texts.centerBold, { color: white, fontSize: 20 }]}>
                 Click to restart flash card
               </Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.restartQuizBtn, {marginTop: 20, marginBottom: 20, backgroundColor: orange}]}
               onPress={() => this.props.navigation.goBack()}>
-              <Text style={[texts.centerWhite, {fontSize: 25}]}>
+              <Text style={[texts.centerBold, { color: white, fontSize: 20}]}>
                 Go back to Deck
               </Text>
             </TouchableOpacity>            
@@ -161,7 +161,9 @@ class Quiz extends Component {
         </View>
         :
         <View style={containers.centerContainer}>
-          <Text>Question: {`${questionIdx + 1}/${questions.length}`}</Text>
+          <Text style={[texts.centerBold, { marginBottom: 10}]}>
+            Question: {`${questionIdx + 1}/${questions.length}`}
+          </Text>
           <View>
             <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
               <Text style={texts.centerBold}>{question}</Text>  
@@ -176,10 +178,10 @@ class Quiz extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#0F7F12'}]} onPress={() => this.handleAnswerSubmit(true)}>
-            <Text style={texts.centerWhite}>I knew this</Text>
+            <Text style={[texts.centerBold, { color: white }]}>I knew this</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.submitBtn, {backgroundColor:'#D22A25'}]} onPress={() => this.handleAnswerSubmit(false)}>
-            <Text style={texts.centerWhite}>I didn't know this</Text>
+            <Text style={[texts.centerBold, { color: white }]}>I didn't know this</Text>
           </TouchableOpacity>
         </View>
       } 
